@@ -14,9 +14,9 @@ module control_unit(input clk,
 			output reg REA,		//read enable A
 			output reg REB, 	//read enable B
 			output reg [1:0] C, 	//control for ALU
-			output reg S2,		//control for MUX2
+			output reg s2,		//control for MUX2
 			
-			output wire [2:0] cs, 	//output to 7seg display
+			output wire [3:0] CS, 	//output to 7seg display
 			output reg done);	//output to LED bar 
    
 	/*
@@ -25,38 +25,51 @@ module control_unit(input clk,
 	* output function
 	* 
 	*/
-	reg [2:0]cs, ns;
+	reg [3:0]cs, ns;
+
+	assign CS = cs; //assign for output CS
 
 	//for states
-	localparam [2:0] s0_IDLE = 0,
-		s1_WRITE1 = 1, 
-		s2_WRITE2 = 2, 
-		s3_READ = 3,
-		s4_ADD = 4,
-		s5_SUB = 5,
-		s6_AND = 6,
-		s7_XOR = 7,
-		s8_OUTPUT = 8;
+	localparam s0_IDLE = 4'b0000;
+	localparam s1_WRITE1 = 4'b0001;
+	localparam	s2_WRITE2 = 4'b0010; 
+	localparam	s3_READ = 4'b0011;
+	localparam	s4_ADD = 4'b0100;
+	localparam	s5_SUB = 4'b0101;
+	localparam	s6_AND = 4'b0110;
+	localparam	s7_XOR = 4'b0111;
+	localparam	s8_OUTPUT = 4'b1000;
 
 	//for opcodes
-	localparam [1:0] ADD = 2'b11, 
-		[1:0] SUB = 2'b10;
-		[1:0] AND = 2'b01,
-		[1:0] XOR;	
-
+	localparam ADD = 2'b11;
+	localparam SUB = 2'b10;
+	localparam	AND = 2'b01;
+	localparam	XOR = 0;
 	
-	always @(posedge clk, rst) begin
-		rst ? cs <= s0_IDLE : cs <= ns;
+	//start at state 0	
+    initial begin
+        cs = s0_IDLE;
+    end
+	
+	always @(posedge clk) begin
+	   if(rst == 1)
+	       cs <= s0_IDLE;
+	    else cs <= ns;
+	//st == 0 ? cs <= s0_IDLE : cs <= ns;
 	end
 
 	//determines how the fsm should act
 	always @(go, op, cs) begin
-		switch(cs) begin
-			s0_IDLE: go ? ns = s1_WRITE1 : ns = s0_IDLE;
-		        s1_WRITE1: ns = s2_WRITE2;
+		case(cs) 
+			s0_IDLE: begin 
+			             if(go) ns = s1_WRITE1;
+			             else ns = s0_IDLE;
+			             //go ? ns = s1_WRITE1 : ns = s0_IDLE; 
+			         end
+		    s1_WRITE1: ns = s2_WRITE2;
 			s2_WRITE2: ns = s3_READ;
 			s3_READ: 
-				switch(op)
+				case(op)
 					ADD: ns = s4_ADD;
 					SUB: ns = s5_SUB;
 					AND: ns = s6_AND;
@@ -75,7 +88,7 @@ module control_unit(input clk,
 
 	//set outputs
 	always @(cs) begin
-		switch(cs) 
+		case(cs) 
 			s0_IDLE: begin s1 = 0; WA = 0; WE = 0; RAA = 0; REA = 0; RAB = 0; REB = 0; C = 0; s2 = 0; done = 0; end
 			s1_WRITE1: begin s1 = 3; WA = 1; WE = 1; RAA = 0; REA = 0; RAB = 0; REB = 0; C = 0; s2 = 0; done = 0; end
 			s2_WRITE2:  begin s1 = 2; WA = 2; WE = 1; RAA = 0; REA = 0; RAB = 0; REB = 0; C = 0; s2 = 0; done = 0; end
