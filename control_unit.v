@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 //control unit for small calculator
 
 module control_unit(input clk,
@@ -34,8 +35,8 @@ module control_unit(input clk,
 		s4_ADD = 4,
 		s5_SUB = 5,
 		s6_AND = 6,
-		s7_XOR = 8,
-		s8_OUTPUT = 9;
+		s7_XOR = 7,
+		s8_OUTPUT = 8;
 
 	//for opcodes
 	localparam [1:0] ADD = 2'b11, 
