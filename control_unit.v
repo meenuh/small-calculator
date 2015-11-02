@@ -1,7 +1,8 @@
 `timescale 1ns/1ps
 //control unit for small calculator
 
-module control_unit(input clk,
+module control_unit(
+            input clk,
 			input wire go,		//to break from being idle
 			input wire [1:0] op,	//operation to do
 			input wire rst,		//reset
