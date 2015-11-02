@@ -90,15 +90,15 @@ module control_unit(
 	//set outputs
 	always @(cs) begin
 		case(cs) 
-			s0_IDLE: begin s1 = 0; WA = 0; WE = 0; RAA = 0; REA = 0; RAB = 0; REB = 0; C = 0; s2 = 0; done = 0; end
+			s0_IDLE: begin s1 = 1; WA = 0; WE = 0; RAA = 0; REA = 0; RAB = 0; REB = 0; C = 0; s2 = 0; done = 0; end
 			s1_WRITE1: begin s1 = 3; WA = 1; WE = 1; RAA = 0; REA = 0; RAB = 0; REB = 0; C = 0; s2 = 0; done = 0; end
 			s2_WRITE2:  begin s1 = 2; WA = 2; WE = 1; RAA = 0; REA = 0; RAB = 0; REB = 0; C = 0; s2 = 0; done = 0; end
-			s3_READ:  begin s1 = 0; WA = 0; WE = 0; RAA = 1; REA = 1; RAB = 2; REB = 1; C = 0; s2 = 0; done = 0; end
-			s4_ADD:  begin s1 = 0; WA = 3; WE = 1; RAA = 0; REA = 0; RAB = 0; REB = 0; C = 3; s2 = 0; done = 0; end
-			s5_SUB:  begin s1 = 0; WA = 3; WE = 1; RAA = 0; REA = 0; RAB = 0; REB = 0; C = 2; s2 = 0; done = 0; end
-			s6_AND:  begin s1 = 0; WA = 3; WE = 1; RAA = 0; REA = 0; RAB = 0; REB = 0; C = 1; s2 = 0; done = 0; end
-			s7_XOR:  begin s1 = 0; WA = 3; WE = 1; RAA = 0; REA = 0; RAB = 0; REB = 0; C = 1; s2 = 0; done = 0; end
-			s8_OUTPUT:  begin s1 = 0; WA = 0; WE = 0; RAA = 0; REA = 0; RAB = 0; REB = 0; C = 0; s2 = 1; done = 1; end
+			s3_READ:  begin s1 = 1; WA = 0; WE = 0; RAA = 0; REA = 0; RAB = 0; REB = 0; C = 0; s2 = 0; done = 0; end
+			s4_ADD:  begin s1 = 0; WA = 3; WE = 1; RAA = 1; REA = 1; RAB = 2; REB = 1; C = 0; s2 = 0; done = 0; end
+			s5_SUB:  begin s1 = 0; WA = 3; WE = 1; RAA = 1; REA = 1; RAB = 2; REB = 1; C = 1; s2 = 0; done = 0; end
+			s6_AND:  begin s1 = 0; WA = 3; WE = 1; RAA = 1; REA = 1; RAB = 2; REB = 1; C = 2; s2 = 0; done = 0; end
+			s7_XOR:  begin s1 = 0; WA = 3; WE = 1; RAA = 1; REA = 1; RAB = 2; REB = 1; C = 3; s2 = 0; done = 0; end
+			s8_OUTPUT:  begin s1 = 1; WA = 0; WE = 0; RAA = 3; REA = 1; RAB = 3; REB = 1; C = 2; s2 = 1; done = 1; end
 		endcase
 	end
 	

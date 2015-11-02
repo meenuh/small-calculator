@@ -29,7 +29,7 @@ module calculator_fpga(
     wire [13:0] bus;                     
       
     /*
-                input clk,
+    input clk,
     input wire go,        //to break from being idle
     input wire [1:0] op,    //operation to do
     input wire rst,        //reset
@@ -49,6 +49,7 @@ module calculator_fpga(
     */  
                
     control_unit U1(
+                    .clk(clk),
                     .go(go),
                     .op(op),
                     .rst(rst),
@@ -61,25 +62,35 @@ module calculator_fpga(
                     .REB(bus[10]),
                     .C(bus[12:11]),
                     .s2(bus[13]),
-                    .cs(CS),
+                    .CS(CS),
                     .done(done)
                     );
-                    
+          /*
+                    s1[1:0]
+                    WA[3:2]
+                    WE[4]
+                    RAA[6:5]
+                    RAB[8:7]
+                    REA[9]
+                    REB[10]
+                    C[12:11]
+                    s2[13]
+                    */               
 //module DP(in1, in2, s1, clk, wa, we, raa, rea, rab, reb, c, s2, out);
     DP U2(
-        .in1(in1),
-        .in2(in2),
-        .s1(bus[1:0]),
-        .clk(clk),
-        .wa(bus[3:2]),
-        .we(bus[4]),
-        .raa(bus[6:5]),
-        .rea(bus[9]),
-        .rab(bus[8:7]),
-        .reb(bus[10]),
-        .c(bus[12:11]),
-        .s2(bus[13]),
-        .out(out));
+        in1,
+        in2,
+        bus[1:0],
+        clk,
+        bus[3:2],
+        bus[4],
+        bus[6:5],
+        bus[9],
+        bus[8:7],
+        bus[10],
+        bus[12:11],
+        bus[13],
+        out);
     
 
 endmodule 
