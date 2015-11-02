@@ -44,8 +44,8 @@ module cu_tb;
 		//checking state 0 outside of loop
         //$display("cs: %d states: %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
         //if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b000000000000000) $display("error");
-        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b000000000000000)begin
-           $display("State %d is incorrect. Should be: 000000000000000 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
+        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b010000000000000)begin
+           $display("State %d is incorrect. Should be: 010000000000000 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
            $stop;
         end
         clk = 1; #5;
@@ -53,8 +53,8 @@ module cu_tb;
         
         go = 1; #5;
         //$display("cs: %d states: %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
-        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b000000000000000)begin
-            $display("State %d is incorrect. Should be: 000000000000000 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
+        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b010000000000000)begin
+            $display("State %d is incorrect. Should be: 010000000000000 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
             $stop;
         end
         clk = 1; #5;
@@ -81,41 +81,41 @@ module cu_tb;
                             $stop;
                         end 
                     3:
-                        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b000000111010000) begin
-                            $display("State %d is incorrect. Should be: 000000111010000 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
+                        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b010000000000000) begin
+                            $display("State %d is incorrect. Should be: 010000000000000 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
                             $stop;
                         end
                     4:
-                        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b001110000001100) begin
-                             $display("State %d is incorrect. Should be: 001110000001100 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
+                        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b001110111010000) begin
+                             $display("State %d is incorrect. Should be: 001110111010000 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
                              $stop;
                         end
                     5:
-                        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b001110000001000) begin
-                            $display("State %d is incorrect. Should be: 001110000001000 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
+                        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b001110111010100) begin
+                            $display("State %d is incorrect. Should be: 001110111010100 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
                             $stop;
                         end
                     6:
-                        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b001110000000100) begin
-                            $display("State %d is incorrect. Should be: 001110000000100 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
+                        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b001110111011000) begin
+                            $display("State %d is incorrect. Should be: 001110111011000 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
                             $stop;
                         end                    
                     7:
-                        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b001110000000100) begin
-                            $display("State %d is incorrect. Should be: 001110000000100 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
+                        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b001110111011100) begin
+                            $display("State %d is incorrect. Should be: 001110111011100 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
                             $stop;
                         end                    
                     8:
-                        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b000000000000011) begin
-                            $display("State %d is incorrect. Should be: 000000000000011 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
+                        if({s1, WA, WE, RAA, REA, RAB, REB, C, s2, done} != 15'b010001111111011) begin
+                            $display("State %d is incorrect. Should be: 010001111111011 but got %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
                             $stop;
                         end                    
                     default: begin
                         $display("Invalid");
                         $stop;
                     end
-                endcase
-               // $display("cs: %d states: %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
+                endcase 
+                //$display("cs: %d states: %b", cs, {s1, WA, WE, RAA, REA, RAB, REB, C, s2, done});
                 clk = 1; #5;
                 clk = 0; #5; 
              end  
