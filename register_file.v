@@ -6,7 +6,7 @@ input [2:0] din;
 output reg [2:0] douta, doutb; 
 reg [2:0] RegFile [3:0];
 
-always @(rea, reb, raa, rab)
+always @(rea, reb, raa, rab, RegFile)
 begin
  if (rea)   douta = RegFile[raa];  
  else douta = 3'b000;  
